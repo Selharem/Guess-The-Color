@@ -1,22 +1,24 @@
 .top{
-    background-color: aqua;
+    background-color: #011526;
     height: 200px;
 }
 
 .middle{
-    background-color: blueviolet;
+    background-color: #3C92A6;
     height: 50px;
+    font-size: 40px;
+    text-align: center;
 }
 
 .bottom{
-    background-color: rgba(0, 0, 0, 0.322);
-    height: 520px;
+    background-color: #89CAD9;
+    height: 500px;
 }
 
 h1{
     text-align: center;
     vertical-align:middle;
-    line-height: 60px;       /* The same as your div height */
+    line-height: 60px;       
 }
 
 td{
