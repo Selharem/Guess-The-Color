@@ -1,20 +1,17 @@
-var a = randomColor();
-var b = randomColor();
-var c = randomColor();
-var colorArray = [a,b,c];
+var a;
+var b;
+var c;
+var colorArray;
 var choosen_id;
 var choosen_color;
 var score = 0;
+var choosens = [];
+var clicks = 0;
 
-document.getElementById("button1").style.backgroundColor= a;
-document.getElementById("button2").style.backgroundColor= b;
-document.getElementById("button3").style.backgroundColor= c;
+startState();
 
-var guess = colorArray[Math.floor(Math.random() * 2)];
 
-document.getElementById('colorguess').innerHTML = guess;
-
-function randomColor(){
+function randomColor() {
     var r = Math.floor(Math.random() * 255);
     var g = Math.floor(Math.random() * 255);
     var b = Math.floor(Math.random() * 255);
@@ -26,53 +23,58 @@ function getIde(clicked_id) {
     choosen();
 }
 
-function choosen(){
+function choosen() {
     switch (choosen_id) {
         case 'button1':
             choosen_color = a;
-            //alert(choosen_color);
+            if (! (choosens.includes(choosen_id)) ) {
+                choosens.push('button1');
+            }            
             break;
         case 'button2':
             choosen_color = b;
-            //alert(choosen_color);
+            if (! (choosens.includes(choosen_id)) ) {
+                choosens.push('button2');
+            }            
             break;
         case 'button3':
             choosen_color = c;
-            //alert(choosen_color);
+            if (! (choosens.includes(choosen_id)) ) {
+                choosens.push('button3');
+            }
             break;
         default:
             break;
     }
     if(choosen_color == guess){
-        // alert('win!!');
-        //score=;
-        document.getElementById("hna").innerHTML = ++score;
-        a = randomColor();
-        b = randomColor();
-        c = randomColor();
-        colorArray = [a,b,c];
-        choosen_id = null;
-        choosen_color = null;
-        document.getElementById("button1").style.backgroundColor= a;
-        document.getElementById("button2").style.backgroundColor= b;
-        document.getElementById("button3").style.backgroundColor= c;
-
-        guess = colorArray[Math.floor(Math.random() * 2)];
-
-        document.getElementById('colorguess').innerHTML = guess;
-        //score = 0;
-        //location.reload();
-        //return false;
+        document.getElementById("hna").innerHTML = 'Score : ' + ++score;
+        startState();
     }
-     
     else{
-        // alert('win!!');
-        //score--;
-        document.getElementById("hna").innerHTML = --score;
-        document.getElementById(choosen_id).style.backgroundColor= 'black';
-
-        //location.reload();
-        //return false;
+        clicks++;
+        if(clicks <= 1){
+            document.getElementById(choosen_id).style.backgroundColor= 'black';
+        }
+        if(clicks >= 2){
+            startState();
+        }
     }
+    console.log(choosens);
+}
+
+function startState() {
+    a = randomColor();
+    b = randomColor();
+    c = randomColor();
+    colorArray = [a,b,c];
+    choosen_id = null;
+    choosen_color = null;
+    clicks = 0;
+    choosens = []
+    document.getElementById("button1").style.backgroundColor = a;
+    document.getElementById("button2").style.backgroundColor = b;
+    document.getElementById("button3").style.backgroundColor = c;
+    guess = colorArray[Math.floor(Math.random() * 2)];
+    document.getElementById('colorguess').innerHTML = guess;
 }
 
